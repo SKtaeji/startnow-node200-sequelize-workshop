@@ -12,6 +12,9 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
+app.use('/api/authors', require('./db/routes/authors'));
+//app.use('/api/blogs', require('./db/routes/blogs'));
+
 app.get('/', (req, res) => {
     res.status(200).send('Hello World!');
 });
