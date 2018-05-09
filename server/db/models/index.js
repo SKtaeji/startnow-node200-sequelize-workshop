@@ -3,32 +3,20 @@
 var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
-var Op = Sequelize.Op;
 var basename  = path.basename(__filename);
-var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
+var env       = process.env.NODE_ENV || 'my_blog';
+var config    = require(path.join(__dirname, '/../config/config.json'))[env];
 var db        = {};
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  console.log('Moon-ello.');
   var sequelize = new Sequelize(
     config.database, 
     config.username, 
     config.password, 
-    config,
-    {
-      operatorsAliases: {
-        $and: Op.and,
-        $or: Op.or,
-        $eq: Op.eq,
-        $gt: Op.gt,
-        $lt: Op.lt,
-        $lte: Op.lte,
-        $like: Op.like
-      }
-    });
+    config
+    );
 }
 
 fs

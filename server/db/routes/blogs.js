@@ -1,16 +1,17 @@
+const db = require('../models'); // initial sequelize model
 const express = require('express');
 const router = express.Router();
-const Author = require("../models/author");
-const Blog = require("../models/blog");
+// const Author = require("../models/author");
+// const Blog = require("../models/blog");
 
 router.get("/", (req, res) => {
-    Blog.findAll().then(blogs => {
+    db.Blog.findAll().then(blogs => {
         res.status(200).json(blogs);
     });
 });
 
 router.get("/:id", (req, res) => {
-    Blog.findById(req.params.id)
+    db.Blog.findById(req.params.id)
         .then(blog => {
             if (blog) {
                 res.status(200).json(author);
@@ -22,14 +23,14 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/featured", (req, res) => {
-    Blog.findAll({ where: { featured: true } })
+    db.Blog.findAll({ where: { featured: true } })
         .then(blog => {
             res.status(200).json(blog);
         });
 });
 
 router.post("/", (req, res) => {
-    Blog.findById(req.params.id)
+    db.Blog.findById(req.params.id)
         .create({
             title: req.body.title,
             authorId: req.body.authorId,
@@ -48,7 +49,7 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-    blog.findById(req.params.id)
+    db.Blog.findById(req.params.id)
     .save({ 
         firstName: req.body.firstName, 
         lastName: req.body.lastName, 
@@ -60,7 +61,7 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
     if (req.params.id) {
-        Blog.findById(req.params.id)
+        db.Blog.findById(req.params.id)
         .destroy()
         .then(blog => {
             res.status(200);
