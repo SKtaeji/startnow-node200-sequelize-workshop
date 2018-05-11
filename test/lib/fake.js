@@ -18,7 +18,7 @@ const fakeBlogs = [{
     title: 'Yak Shaving',
     article: `Yak shaving is programming lingo for the seemingly endless series of small
         tasks that have to be completed before the next step in a project can move forward.`,
-    published: null,
+    published: Date.now(),
     featured: true
 }];
 

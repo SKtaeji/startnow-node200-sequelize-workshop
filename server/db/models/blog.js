@@ -1,17 +1,16 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  var Blog = sequelize.define('Blog', {
+  var Blog = sequelize.define("Blog", {
     title: DataTypes.STRING,
-    authorId: DataTypes.INTEGER,
     article: DataTypes.TEXT,
     featured: DataTypes.BOOLEAN,
-    published: DataTypes.DATE
-  }, {});
+    published: { type: DataTypes.DATE }
+  });
 
   Blog.associate = function(models) {
     // associations can be defined here
-    models.Blog.belongsTo(models.Author, {foreignKey: 'authorId'})
-  }
-  
+    models.Blog.belongsTo(models.Author, { foreignKey: "authorId" });
+  };
+
   return Blog;
 };
